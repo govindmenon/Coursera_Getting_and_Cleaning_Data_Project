@@ -45,10 +45,11 @@ names(label) <- "Activity"
 finalData <- cbind(subject,label,data)
 
 #Writing the merged data-set into a file
-write.table(finalData,"final_data.txt")
+write.table(finalData,"final_data.txt", row.names = FALSE)
 
 
 #Creating independent tidy data-set with the average of each variable for each activity and each subject
+library(data.table)
 finalDT <- data.table(finalData)
 meanData<- finalDT[, lapply(.SD, mean), by=c("Subject", "Activity")]
-write.table(meanData,"mean_data.txt")
+write.table(meanData,"mean_data.txt", row.names = FALSE)
